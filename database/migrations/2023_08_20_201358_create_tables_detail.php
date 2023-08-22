@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_id')->unique();
             $table->unsignedBigInteger('user_id');
             $table->decimal('total', 10, 2);
             $table->timestamp('order_date');
@@ -30,7 +29,6 @@ return new class extends Migration
             $table->timestamps();
     
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('id_product')->references('id')->on('products');
         });
     }
 
@@ -40,5 +38,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('orders');
+        Schema::dropIfExists('product_details');
     }
 };
