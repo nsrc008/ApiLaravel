@@ -41,9 +41,29 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // Carga el contenido del archivo JSON
+        $jsonPath = public_path('../data.json');
+        $jsonData = File::get($jsonPath);
+
+        // Decodifica el JSON
+        $jsonArray = json_decode($jsonData, true);
+
+        // Busca el producto en el arreglo JSON por su ID
+        $product = null;
+        foreach ($jsonArray['data'] as $item) {
+            if ($item['id'] == $id) {
+                $product = $item;
+                break;
+            }
+        }
+
+        if ($product) {
+            return response()->json($product);
+        } else {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
     }
 
     /**

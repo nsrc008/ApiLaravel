@@ -43,4 +43,5 @@ Route::group([
     'prefix' => 'data'
 ], function ($router) {
     Route::get('products', 'App\Http\Controllers\ProductsController@store');
+    Route::get('products/{id}', 'App\Http\Controllers\ProductsController@show');
 });
