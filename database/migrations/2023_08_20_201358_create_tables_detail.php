@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->decimal('total', 10, 2);
-            $table->timestamp('order_date');
+            $table->timestamp('order_date')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
     
             $table->foreign('user_id')->references('id')->on('users');
