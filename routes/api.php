@@ -37,3 +37,10 @@ Route::group([
     Route::post('register_order', 'App\Http\Controllers\OrdersController@store');
     Route::get('/user/{id}/orders', 'App\Http\Controllers\OrdersController@index');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'data'
+], function ($router) {
+    Route::get('products', 'App\Http\Controllers\ProductsController@store');
+});
